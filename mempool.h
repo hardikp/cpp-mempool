@@ -8,6 +8,7 @@ private:
   unsigned capacity_;
 
   std::vector<T *> markers_;
+  // Contains the list of memory addresses
   T **memstack_;
 
 public:
@@ -30,25 +31,31 @@ public:
     free(memstack_);
   }
 
-  T *Allocate() {
-    if (size_ == markers_) {
+  T *allocate() {
+    if (size_ == capacity_) {
       // Allocated memory has filled, reallocate memory
       free(memstack_);
+      memstack_ = (T **)calloc(2 * capacity_, sizeof(T));
+
       T *new_block = (T *)calloc(capacity_, sizeof(T));
       markers_.push_back(new_block);
-      memstack_ = (T **)calloc(2 * capacity_, sizeof(T));
+
       for (unsigned i = 0; i < capacity_; i++) {
-        memstack_[capacity_ + i] = new_block[i];
+        memstack_[capacity_ + i] = new_block + i;
       }
       capacity_ *= 2;
     }
+
     T *next = memstack_[size_++];
     bzero(next, sizeof(T));
     return next;
   }
 
-  void DeAllocate(T *mem) {
+  void deallocate(T *mem) {
     // Decrease the pointer
     memstack_[size_--] = mem;
   }
+
+  int size() { return size_; }
+  int capacity() { return capacity_; }
 };
