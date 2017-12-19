@@ -1,0 +1,13 @@
+dist: xenial
+language: cpp
+
+matrix:
+  include:
+    - compiler: gcc
+      env: COMPILER=g++
+    - compiler: clang
+      env: COMPILER=chang++
+
+script:
+  - cmake -DCMAKE_CXX_COMPILER=$COMPILER . && make
+  - ./run_tests
