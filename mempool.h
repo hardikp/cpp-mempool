@@ -46,7 +46,7 @@ public:
       free(memstack_);
 
       // Allocated memory has filled, reallocate memory
-      memstack_ = (T **)calloc(2 * capacity_, sizeof(T));
+      memstack_ = (T **)calloc(2 * capacity_, sizeof(T *));
 
       T *new_block = (T *)calloc(capacity_, sizeof(T));
 
@@ -71,7 +71,7 @@ public:
   void deallocate(T *mem) {
     // mem location is now available
     // Add that at the top of the stack
-    memstack_[size_--] = mem;
+    memstack_[--size_] = mem;
   }
 
   int size() { return size_; }
