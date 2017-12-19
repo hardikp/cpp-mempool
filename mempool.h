@@ -1,3 +1,5 @@
+#include <stdlib.h>
+#include <string.h>
 #include <vector>
 
 #define DEFAULT_MEMPOOL_SIZE 16
