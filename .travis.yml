@@ -4,7 +4,13 @@ language: cpp
 matrix:
   include:
     - compiler: gcc
-      env: COMPILER=g++
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+            - g++-5.4
+      env: COMPILER=g++-5.4
     - compiler: clang
       env: COMPILER=chang++
 
