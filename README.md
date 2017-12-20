@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/hardikp/cpp-mempool.svg?branch=master)](https://travis-ci.org/hardikp/cpp-mempool)
+
 # cpp-mempool
 C++ header-only mempool library
 
